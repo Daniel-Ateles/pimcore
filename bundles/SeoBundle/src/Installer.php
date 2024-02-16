@@ -47,13 +47,10 @@ class Installer extends SettingsStoreAwareInstaller
         $db = \Pimcore\Db::get();
 
         foreach (self::USER_PERMISSIONS as $permission) {
-            $permissionExists = $db->fetchOne('SELECT count(*) FROM users_permission_definitions');
-            if (!$permissionExists) {
-                $db->insert('users_permission_definitions', [
-                    $db->quoteIdentifier('key') => $permission,
-                    $db->quoteIdentifier('category') => self::USER_PERMISSIONS_CATEGORY,
-                ]);
-            }
+            $db->insert('users_permission_definitions', [
+                $db->quoteIdentifier('key') => $permission,
+                $db->quoteIdentifier('category') => self::USER_PERMISSIONS_CATEGORY,
+            ]);
         }
     }
 
